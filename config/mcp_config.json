@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ai-learning-coach": {
+      "command": "python",
+      "args": ["-m", "mcp_server.main"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "API_BASE_URL": "http://localhost:8000/api"
+      }
+    }
+  }
+}
+
