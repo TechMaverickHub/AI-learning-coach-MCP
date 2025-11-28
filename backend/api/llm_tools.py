@@ -1,6 +1,6 @@
 """
-LLM Tools/Functions definitions for OpenAI and other LLMs.
-This replaces the need for Claude Desktop MCP.
+LLM Tools/Functions definitions for Groq and other LLMs.
+Compatible with OpenAI-compatible APIs (Groq, OpenAI, etc.).
 """
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,8 +10,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-# OpenAI Function Definitions
-OPENAI_FUNCTIONS = [
+# LLM Function Definitions (OpenAI-compatible format)
+LLM_FUNCTIONS = [
     {
         "type": "function",
         "function": {
@@ -114,13 +114,11 @@ OPENAI_FUNCTIONS = [
 def get_llm_tools(request):
     """
     Get LLM function/tool definitions.
-    Compatible with OpenAI, Anthropic, and other LLM providers.
+    Compatible with Groq, OpenAI, Anthropic, and other LLM providers.
     """
-    format_type = request.query_params.get('format', 'openai')
-    
-    # Return OpenAI format (can be used by any LLM that supports function calling)
+    # Return OpenAI-compatible format (can be used by any LLM that supports function calling)
     return Response({
-        'tools': OPENAI_FUNCTIONS,
+        'tools': LLM_FUNCTIONS,
         'format': 'openai'
     })
 
