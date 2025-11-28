@@ -60,8 +60,7 @@ class RSSService:
     
     def fetch_all_feeds(self):
         """Fetch all RSS feeds (for scheduled task)"""
-                from ..rss.models import RSSFeed, RSSArticle
-                from django.utils import timezone
+        from rss.models import RSSFeed, RSSArticle
         
         feeds = RSSFeed.objects.all()
         for feed in feeds:

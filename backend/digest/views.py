@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Digest
 from .serializers import DigestSerializer
-from ..services.digest_service import DigestService
+from services.digest_service import DigestService
 import logging
 
 logger = logging.getLogger(__name__)

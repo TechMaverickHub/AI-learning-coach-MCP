@@ -12,7 +12,6 @@ class LearningProgress(models.Model):
     progress = models.FloatField()  # 0.0 to 1.0
     notes = models.TextField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
-    memory_id = models.TextField(null=True, blank=True)  # Claude Memory ID
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:

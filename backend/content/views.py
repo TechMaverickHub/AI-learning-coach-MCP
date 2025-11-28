@@ -6,9 +6,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import ContentSource
 from .serializers import ContentSourceSerializer
-from ..services.pdf_processor import PDFProcessor
-from ..services.embedding_service import EmbeddingService
-from ..utils.chunking import chunk_text
+from services.pdf_processor import PDFProcessor
+from services.embedding_service import EmbeddingService
+from utils.chunking import chunk_text
 import logging
 
 logger = logging.getLogger(__name__)

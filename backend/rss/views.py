@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import RSSFeed, RSSArticle
 from .serializers import RSSFeedSerializer, RSSArticleSerializer
-from ..services.rss_service import RSSService
+from services.rss_service import RSSService
 from django.utils import timezone
 import logging
 

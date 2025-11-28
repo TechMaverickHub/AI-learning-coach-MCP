@@ -5,7 +5,7 @@ import os
 from openai import OpenAI
 from .rag_service import RAGService
 from .embedding_service import EmbeddingService
-from ..utils.prompts import DIGEST_PROMPT
+from utils.prompts import DIGEST_PROMPT
 import logging
 
 logger = logging.getLogger(__name__)
