@@ -2,7 +2,9 @@ import streamlit as st
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import pdfplumber
-from sentence_transformers import SentenceTransformer
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
+
+
 from groq import Groq
 import os
 import tempfile
@@ -16,7 +18,9 @@ load_dotenv()
 DB_URL = os.getenv("DATABASE_URL")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-embedder = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
+embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+
 client = Groq(api_key=GROQ_API_KEY)
 
 # -----------------------------
@@ -46,7 +50,7 @@ def insert_content(title, text, embedding, url="uploaded_document"):
 # Search Top-K Relevant Content
 # -----------------------------
 def search_similar(query, k=5):
-    query_emb = embedder.encode(query).tolist()
+    query_emb = embedder.embed_query(query)
     emb_vec = "[" + ",".join(f"{float(x):.6f}" for x in query_emb) + "]"
 
     sql = f"""
@@ -118,7 +122,7 @@ with tabs[0]:
         st.write(text[:500] + "…")
 
         if st.button("Store in Supabase"):
-            emb = embedder.encode(text).tolist()
+            emb = embedder.embed_documents([text])
             doc_id = insert_content(uploaded.name, text, emb)
             st.success(f"Document stored with ID: {doc_id}")
 

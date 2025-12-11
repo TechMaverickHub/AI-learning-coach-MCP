@@ -1,4 +1,5 @@
 import feedparser
+from rag.lc_utils import embed_text
 from utils.embedder import embed
 from utils.db_supabase import insert_source, list_sources, upsert_content
 
@@ -18,7 +19,7 @@ def fetch_and_store():
             text = entry.get("summary") or entry.get("content", [{"value": ""}])[0].get("value","") or entry.get("title","")
             title = entry.get("title") or text[:100]
             link = entry.get("link")
-            embedding = embed(text)
+            embedding = embed_text(text)
             try:
                 upsert_content(title, text, link, embedding)
                 total += 1

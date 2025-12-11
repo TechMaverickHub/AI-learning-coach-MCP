@@ -83,3 +83,17 @@ def save_digest(week: int, digest_text: str):
         with conn.cursor() as cur:
             cur.execute(sql, (week, digest_text))
             return cur.fetchone()["id"]
+
+
+def get_all_content():
+    """
+    Return all content rows used to build the vectorstore.
+    Each row dict must contain: id, title, text, url (optional), embedding (optional)
+    """
+    sql = "select id, title, text, url from content order by id;"
+    with _conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            rows = cur.fetchall()
+            # cur is RealDictCursor so rows are dict-like
+            return rows
